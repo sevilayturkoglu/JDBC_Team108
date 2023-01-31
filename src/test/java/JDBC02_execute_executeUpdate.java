@@ -21,14 +21,18 @@ public class JDBC02_execute_executeUpdate {
         Statement st = con.createStatement();
 
         /*======================================================================
-		  ORNEK1: isciler tablosunu siliniz.
+		                ORNEK1: isciler tablosunu siliniz.
  	    ========================================================================*/
 
         String dropQuery = "DROP TABLE isciler";
 
-        // System.out.println(st.execute(dropQuery));
-
-        if (!st.execute(dropQuery)) {
+       //  System.out.println(st.execute(dropQuery));
+       /*if(st.execute(dropQuery)==false){
+    System.out.println("Isciler tablosu silindi!");
+       }else{
+    System.out.println("silinmedi");
+}*/
+        if (!st.execute(dropQuery)) {//if in icine girmesi icin false olan sonucu true ya cevirdik,yani sonuc false ise "isciler tablosu silinmis"
             System.out.println("Isciler tablosu silindi!");
         }
 
@@ -61,11 +65,11 @@ public class JDBC02_execute_executeUpdate {
             INSERT INTO isciler VALUES(60, 'LAB', 3000)
             INSERT INTO isciler VALUES(50, 'ARGE', 4000)
 	     ========================================================================*/
-        System.out.println("=============== 1. Yontem ==============");
+        System.out.println("=============== 1.Yontem ===============");
 
         String [] queries = {"INSERT INTO isciler VALUES(70, 'HR', 5000)",
-                "INSERT INTO isciler VALUES(60, 'LAB', 3000)",
-                "INSERT INTO isciler VALUES(50, 'ARGE', 4000)"};
+                             "INSERT INTO isciler VALUES(60, 'LAB', 3000)",
+                             "INSERT INTO isciler VALUES(50, 'ARGE', 4000)"};
 
         int count = 0;
         for (String each : queries) {
@@ -138,6 +142,32 @@ public class JDBC02_execute_executeUpdate {
                     iscilerTablosu2.getString(2) + " " +
                     iscilerTablosu2.getInt(3));
         }
+        /*=======================================================================
+ ORNEK8: Isciler tablosundan birimi 'ARGE' olan iscileri siliniz.
+========================================================================*/
+        String deleteQuery = "delete from isciler  WHERE birim='arge'";
 
+        int satirDelete = st.executeUpdate(deleteQuery);
+
+        System.out.println(satirDelete + " satir guncellendi!");
+
+        /*=======================================================================
+	      ORNEK8: isciler tablosunun son halini goruntuleyin.
+	     ========================================================================*/
+
+        System.out.println("================ Isciler Tablosu Arge Sil Islemi ================");
+
+        ResultSet iscilerTablosu3 = st.executeQuery(selectQuery);
+
+        while(iscilerTablosu3.next()){
+            System.out.println(iscilerTablosu3.getInt(1) + " " +
+                    iscilerTablosu3.getString(2) + " " +
+                    iscilerTablosu3.getInt(3));
+        }
+        con.close();
+        st.close();
+        iscilerTablosu.close();
+        iscilerTablosu2.close();
+        iscilerTablosu3.close();
     }
 }

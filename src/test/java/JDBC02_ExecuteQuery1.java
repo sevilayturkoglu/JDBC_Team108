@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class JDBC02_Query1 {
+public class JDBC02_ExecuteQuery1 {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -12,7 +12,7 @@ public class JDBC02_Query1 {
          ORNEK SORU1: Id'si 1'den buyuk firmalarin ismini ve iletisim_isim'ini isim
          ters sirali yazdirin.
         ========================================================================*/
-        /*
+       /*
         CREATE TABLE firmalar
         (
         id INT,
@@ -25,8 +25,8 @@ public class JDBC02_Query1 {
         '1', 'ACB', 'Ayse Can'
         '3', 'KRM', 'Ayse Gulmez'
         '4', 'FSD', 'Veli Gul'
+*/
 
-         */
        // ResultSet rst = st.executeQuery("Select isim, iletisim_isim from firmalar where id >1 order by isim desc");
 
         //String selectquery="select isim, iletisim_isim from firmalar where id>1 order by isim desc";
@@ -38,7 +38,7 @@ public class JDBC02_Query1 {
         ResultSet data=st.executeQuery(selectquery);
 
         while(data.next()){
-            System.out.println(data.getString("isim")+" "+data.getString("iletisim_isim"));
+            System.out.println(data.getString("isim")+" "+data.getString("iletisim_isim"));//column label i ile cagirdik
         }
 
 
@@ -47,6 +47,7 @@ public class JDBC02_Query1 {
           ORNEK2: Iletisim isminde 'li' iceren firmalarin id'lerini ve isim'ini
           id sirali yazdirin.
         ========================================================================*/
+
        String selectQuery= "select id,isim from firmalar where iletisim_isim like '%li%' order by id";
 
        ResultSet veri=st.executeQuery(selectQuery);
