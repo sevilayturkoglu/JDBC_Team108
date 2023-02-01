@@ -39,10 +39,10 @@ public class JDBC_Deneme {
         System.out.println(a + " satir eklendi");
 
         /*=======================================================================
-	      ORNEK4: isciler tablosuna birden fazla yeni kayıt ekleyelim.
-	        INSERT INTO isciler VALUES(70, 'HR', 5000)
-            INSERT INTO isciler VALUES(60, 'LAB', 3000)
-            INSERT INTO isciler VALUES(50, 'ARGE', 4000)
+	      ORNEK4: pupils tablosuna birden fazla yeni kayıt ekleyelim.
+	        insert into pupils values (14,'Karen','Kirsehir')",
+                "insert into pupils values (8,'Nalan','Bursa')",
+                "insert into pupils values (9,'Kemal','Eskisehir'
 	     ========================================================================*/
         String[] valuesler = {"insert into pupils values (14,'Karen','Kirsehir')",
                 "insert into pupils values (8,'Nalan','Bursa')",
@@ -53,9 +53,14 @@ public class JDBC_Deneme {
             count += st.executeUpdate(each);
         }
         System.out.println(count + " adet row eklendi");
-
-        String[] valuesler1 = {"insert into pupils values (5,'Sali','Bursa')",
-                "insert into pupils values (18,'Erman','Erzurum')",
+ /*=======================================================================
+	      ORNEK5: pupils tablosuna birden fazla yeni kayıt ekleyelim.
+	        insert into pupils values (5,'Salih','Bursa')",
+                "insert into pupils values (18,'Erman','Izmir')",
+                "insert into pupils values (19,'Jale','Kars')
+	     ========================================================================*/
+        String[] valuesler1 = {"insert into pupils values (5,'Salih','Bursa')",
+                "insert into pupils values (18,'Erman','Izmir')",
                 "insert into pupils values (19,'Jale','Kars')"};
         for (String each : valuesler1
         ) {
@@ -68,7 +73,7 @@ public class JDBC_Deneme {
             System.out.println(pupi.getInt(1) + " " + pupi.getString(2) + " " + pupi.getString(3));
         }
         /*=======================================================================
-		  ORNEK 5: Bursa da ki pupilslerin id lerini iki arttir
+		  ORNEK 6: Bursa da ki pupilslerin nu lerini iki arttir
 		========================================================================*/
         st.executeUpdate("update pupils set nu=nu+2 where sehir='Bursa'");
       //table yazdir
@@ -78,7 +83,7 @@ public class JDBC_Deneme {
 
         }
          /*=======================================================================
- ORNEK8: Isciler tablosundan birimi 'ARGE' olan iscileri siliniz.
+ ORNEK8: pupils tablosundan  sehri Kars veya Kirsehir olanlari siliniz.
 ========================================================================*/
         int s=st.executeUpdate("delete from pupils where sehir in('Kars','Kirsehir')");
         System.out.println(s+" tane row etkilendi");
@@ -87,5 +92,10 @@ public class JDBC_Deneme {
             System.out.println(pupi2.getInt(1) + " " + pupi2.getString(2) + " " + pupi2.getString(3));
 
         }
+        con.close();
+        st.close();
+        pupi.close();
+        pupi1.close();
+        pupi2.close();
     }
 }

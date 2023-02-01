@@ -39,11 +39,11 @@ public class JDBC02_execute_executeUpdate {
         /*=======================================================================
           ORNEK2: isciler adinda bir tablo olusturunuz id int,
           birim VARCHAR(10), maas int
-	    ========================================================================*/
+	    =========================================================================*/
 
         String createTable = "CREATE TABLE isciler" +
-                "(id INT, " +
-                "birim VARCHAR(10), " +
+                "(id INT," +
+                "birim VARCHAR(10)," +
                 "maas INT)";
 
         if (!st.execute(createTable)) {
